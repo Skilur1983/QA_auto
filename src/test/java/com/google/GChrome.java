@@ -29,6 +29,15 @@ public class GChrome extends WebSettings{
     }
 
     @Test
+    public void googleSearch() {
+        driver.get("https://www.google.com/");
+        String title = driver.getTitle();
+        Assert.assertTrue(title.equals("Google"));
+
+        WebElement searchField = driver.findElementByName("q");
+    }
+
+    @Test
     public void createAccount() {
         driver.get("https://accounts.google.com/AccountChooser?service=mail&continue=https://mail.google.com/mail/");
         String title = driver.getTitle();
