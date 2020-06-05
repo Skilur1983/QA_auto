@@ -10,14 +10,12 @@ public class WebSettings {
 
     @Before
     public void setUp() {
-        System.out.println("GCrome Google testing");
-        System.setProperty("webdriver.chrome.driver", "/home/dmitry/DevTools/chromedriver");
-        driver = new ChromeDriver();
+        System.setProperty("webdriver.chrome.driver", "/home/dmitry/DevTools/chromedriver"); // here you set path to the ChromeDriver on your drive
+        driver = new ChromeDriver(); // it doesn't matter if you'll set it here or higher, but it should be set here before @After
     }
 
     @After
     public void close() {
-        System.out.println("GChrome Google tesing is complete");
-        driver.quit();
+        driver.quit(); // don't forget to quit. Otherwise you'll create a zombie
     }
 }
