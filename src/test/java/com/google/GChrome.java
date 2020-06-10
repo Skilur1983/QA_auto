@@ -30,11 +30,22 @@ public class GChrome extends WebSettings{
 
     @Test
     public void googleSearch() {
-        driver.get("https://www.google.com/");
+        driver.get("https://www.google.com/"); // navigates to Google page
         String title = driver.getTitle();
-        Assert.assertTrue(title.equals("Google"));
+        Assert.assertTrue(title.equals("Google")); // page check by title
+
+        WebDriverWait wait = new WebDriverWait(driver, 100);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("q"))); // check for search field appearance
 
         WebElement searchField = driver.findElementByName("q");
+        searchField.sendKeys("NetCracker Su"); // start search text
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span/b[text()='my']"))).click(); // picking search request from suggestions
+
+        driver.findElementByXPath("//h3[text()='Детальный отзыв о гребле в сумском офисе Netcracker ...']").click(); // picking specific page by name
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[text()='Детальный отзыв о гребле в сумском офисе Netcracker']")));
+
     }
 
     @Test
