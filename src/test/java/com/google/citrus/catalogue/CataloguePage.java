@@ -40,6 +40,7 @@ public class CataloguePage {
     }
 
     public CataloguePage openGoodCategoryPage(String goodCategory) {
+        driverD.waitUntil(20, CATALOGUELINK);
         driverD.click(CATALOGUELINK);
         driverD.waitUntil(20, String.format(GOODCATEGORYLINK, goodCategory));
         driverD.click(String.format(GOODCATEGORYLINK, goodCategory));
@@ -85,11 +86,8 @@ public class CataloguePage {
 
     public List<Good> goodsWithHighestPricesByBrand(int numberOfGoods, String brand) {
         List<Good> goods = new ArrayList<>();
-
-        int generalNumberOfGoods = numberOfItemsInCategoryBrandFilter(brand);
-
-        System.out.println(generalNumberOfGoods);
         String price;
+        int generalNumberOfGoods = numberOfItemsInCategoryBrandFilter(brand);
 
         for (int i = 1; i <= generalNumberOfGoods; i++) {
             driverD.waitUntil(25, String.format(ITEMPRICEXPATH, i));
@@ -99,14 +97,10 @@ public class CataloguePage {
                 price = price.replaceAll("\\s+", "");
                 Good good = new Good(Integer.toString(i), Integer.parseInt(price));
                 goods.add(good);
-            } else {
-                System.out.println("No Cart");
             }
         }
         goods = Good.goodsWithHighestPrices(goods, numberOfGoods);
-        for (Good g : goods) {
-            System.out.println(g.name + "; " + g.price);
-        }
+
         return goods;
     }
 

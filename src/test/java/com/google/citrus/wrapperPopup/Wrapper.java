@@ -13,7 +13,7 @@ public class Wrapper {
     }
 
     public boolean wrapperCheck() {
-        driverD.waitUntil(50, WRAPPERPATH);
+        // driverD.waitUntil(20, WRAPPERPATH);
         if (driverD.find(WRAPPERPATH) != 0){
             return true;
         }
